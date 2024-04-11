@@ -89,7 +89,7 @@ public class AllOrdersActivity extends AppCompatActivity {
             totalAmountEditText.setText("");
             showToast("Order canceled successfully.");
         } else {
-            showToast("Please select an order to cancel.");
+            showToast("There is no selected order to cancel.");
         }
     }
 
