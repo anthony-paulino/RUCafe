@@ -23,7 +23,7 @@
         </activity>
         <activity android:name=".CoffeeMenuActivity"/>
         <activity android:name=".CurrentOrderActivity"/>
-
+        <activity android:name=".AllOrdersActivity"/>
 
     </application>
 

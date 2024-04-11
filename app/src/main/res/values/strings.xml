@@ -43,7 +43,9 @@
     <string name="place_order">Place Order</string>
     <string name="subtotal">subtotal</string>
     <string name="salestax">salesTax</string>
-    <string name="totalamount">totalAmount</string>
+    <string name="totalamount">Total Amount</string>
+    <string name="all_orders">All Orders</string>
+    <string name="cancel_selected_order">Cancel Selected Order</string>
 
 
 </resources>

@@ -27,6 +27,7 @@ public class MainActivity extends AppCompatActivity {
         orderManager = GlobalDataManager.getInstance().getOrderManager();
         ImageButton coffeeButton = findViewById(R.id.coffeeButton);
         ImageButton currentOrderButton = findViewById(R.id.currentOrderButton);
+        ImageButton allOrdersButton = findViewById(R.id.allOrdersButton);
 
         coffeeButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -39,6 +40,12 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 navigateTo(CurrentOrderActivity.class);
+            }
+        });
+        allOrdersButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                navigateTo(AllOrdersActivity.class);
             }
         });
 

@@ -72,7 +72,6 @@ public class CurrentOrderActivity extends AppCompatActivity implements AdapterVi
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("Remove Item");
         builder.setMessage("Are you sure you want to remove this item?");
-
         // Add the "Yes" button, which removes the item if clicked
         builder.setPositiveButton("Yes", (dialog, which) -> {
             MenuItem selectedItem = currentOrderItems.get(position);
