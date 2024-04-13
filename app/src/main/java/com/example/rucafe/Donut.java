@@ -44,9 +44,16 @@ public class Donut extends MenuItem {
      *
      * @return The flavor of the donut.
      */
-
     public String getFlavor() {
         return flavor;
+    }
+
+    /**
+     * Set the quantity of the donut object
+     * @param quantity the amount that the quantity will be set to.
+     */
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
     }
 
     /**

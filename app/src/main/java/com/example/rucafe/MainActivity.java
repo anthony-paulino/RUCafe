@@ -27,6 +27,7 @@ public class MainActivity extends AppCompatActivity {
         orderManager = GlobalDataManager.getInstance().getOrderManager();
         ImageButton coffeeButton = findViewById(R.id.coffeeButton);
         ImageButton sandwichButton = findViewById(R.id.sandwichButton);
+        ImageButton donutButton = findViewById(R.id.donutButton);
         ImageButton currentOrderButton = findViewById(R.id.currentOrderButton);
         ImageButton allOrdersButton = findViewById(R.id.allOrdersButton);
 
@@ -43,6 +44,14 @@ public class MainActivity extends AppCompatActivity {
                 navigateTo(SandwichMenuActivity.class);
             }
         });
+
+        donutButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                navigateTo(DonutMenuActivity.class);
+            }
+        });
+
 
         currentOrderButton.setOnClickListener(new View.OnClickListener() {
             @Override

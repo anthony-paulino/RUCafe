@@ -47,10 +47,10 @@
         android:src="@drawable/sandwich1"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.861"
+        app:layout_constraintHorizontal_bias="0.831"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.355" />
+        app:layout_constraintVertical_bias="0.357" />
 
     <ImageButton
         android:id="@+id/currentOrderButton"
@@ -66,7 +66,23 @@
         app:layout_constraintHorizontal_bias="0.183"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/RUCafeImage"
-        app:layout_constraintVertical_bias="0.726" />
+        app:layout_constraintVertical_bias="0.739" />
+
+    <ImageButton
+        android:id="@+id/donutButton"
+        android:layout_width="142dp"
+        android:layout_height="129dp"
+        android:background="@null"
+        android:contentDescription="@string/donut_image"
+        android:padding="8dp"
+        android:scaleType="fitCenter"
+        android:src="@drawable/donut1"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/RUCafeImage"
+        app:layout_constraintVertical_bias="0.547" />
 
     <ImageButton
         android:id="@+id/allOrdersButton"
@@ -79,10 +95,10 @@
         android:src="@drawable/all_orders"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.848"
+        app:layout_constraintHorizontal_bias="0.836"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/RUCafeImage"
-        app:layout_constraintVertical_bias="0.726" />
+        app:layout_constraintVertical_bias="0.737" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

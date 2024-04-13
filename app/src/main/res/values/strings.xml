@@ -41,6 +41,8 @@
     <string name="tomato">Tomato</string>
     <string name="lettuce">Lettuce</string>
     <string name="sandwich_added_to_order_message">Sandwich item was added to the order.</string>
+    <string name="plus_sign">+</string>
+    <string name="donut_image">Donut Image</string>
 
     <string-array name="coffee_sizes_array">
         <item>Short</item>
@@ -67,6 +69,49 @@
         <item>Beef</item>
         <item>Fish</item>
         <item>Chicken</item>
+    </string-array>
+
+    <string-array name="tv_donutLabels">
+        <item>Yeast Donut: Chocolate Frosted</item>
+        <item>Yeast Donut: Glazed</item>
+        <item>Yeast Donut: Jelly</item>
+        <item>Yeast Donut: Lemon Filled</item>
+        <item>Yeast Donut: Strawberry Frosted</item>
+        <item>Yeast Donut: Sugar</item>
+        <item>Cake Donut: Blueberry</item>
+        <item>Cake Donut: Cinnamon</item>
+        <item>Cake Donut: Old Fashion</item>
+        <item>Donut Holes: Cinnamon</item>
+        <item>Donut Holes: Glazed</item>
+        <item>Donut Holes: Jelly</item>
+    </string-array>
+
+    <string-array name="donutFlavors">
+        <item>Chocolate Frosted</item>
+        <item>Glazed</item>
+        <item>Jelly</item>
+        <item>Lemon Filled</item>
+        <item>Strawberry Frosted</item>
+        <item>Sugar</item>
+        <item>Blueberry</item>
+        <item>Cinnamon</item>
+        <item>Old Fashion</item>
+        <item>Cinnamon</item>
+        <item>Glazed</item>
+        <item>Jelly</item>
+    </string-array>
+
+    <string-array name="quantity_array">
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+        <item>6</item>
+        <item>7</item>
+        <item>8</item>
+        <item>9</item>
+        <item>10</item>
     </string-array>
 
 

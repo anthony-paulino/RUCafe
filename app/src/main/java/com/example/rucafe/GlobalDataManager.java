@@ -1,15 +1,16 @@
 package com.example.rucafe;
 
-import androidx.databinding.ObservableArrayList;
+import java.util.HashMap;
 
 public class GlobalDataManager {
     private static GlobalDataManager instance;
     private OrderManager orderManager;
-    private ObservableArrayList<MenuItem> currentOrderItems;
 
+    private HashMap<String, Integer> donutImageMap;
 
     private GlobalDataManager() {
         orderManager = new OrderManager();
+        initializeDonutImageMap();
     }
 
     public static synchronized GlobalDataManager getInstance() {
@@ -21,5 +22,31 @@ public class GlobalDataManager {
 
     public OrderManager getOrderManager() {
         return orderManager;
+    }
+
+    public int getDonutImageResource(String donutName) {
+        if (donutImageMap.containsKey(donutName)) {
+            return donutImageMap.get(donutName);
+        } else {
+            // Return a default image resource if the donut name is not found
+            return -1;
+        }
+    }
+
+    private void initializeDonutImageMap() {
+        donutImageMap = new HashMap<>();
+        // Populate the HashMap with donut names and their corresponding image resources
+        donutImageMap.put("Yeast Donut: Chocolate Frosted", R.drawable.yeast_chocolatefrosted);
+        donutImageMap.put("Yeast Donut: Glazed", R.drawable.yeast_glazed);
+        donutImageMap.put("Yeast Donut: Jelly", R.drawable.yeast_jelly);
+        donutImageMap.put("Yeast Donut: Lemon Filled", R.drawable.yeast_lemonfilled);
+        donutImageMap.put("Yeast Donut: Strawberry Frosted", R.drawable.yeast_strawberryfrosted);
+        donutImageMap.put("Yeast Donut: Sugar", R.drawable.yeast_sugar);
+        donutImageMap.put("Cake Donut: Blueberry", R.drawable.cake_blueberry);
+        donutImageMap.put("Cake Donut: Cinnamon", R.drawable.cake_cinamon);
+        donutImageMap.put("Cake Donut: Old Fashion", R.drawable.cake_oldfashion);
+        donutImageMap.put("Donut Holes: Cinnamon", R.drawable.hole_cinnamon);
+        donutImageMap.put("Donut Holes: Glazed", R.drawable.hole_glazed);
+        donutImageMap.put("Donut Holes: Jelly", R.drawable.hole_jelly);
     }
 }
