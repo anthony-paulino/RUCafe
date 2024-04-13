@@ -23,6 +23,25 @@
     <string name="coffee_added_to_order_message">Coffee item was added to the order.</string>
     <string name="current_order">Current Order</string>
 
+    <string name="currentOrder_imagebutton">Current Order Image</string>
+    <string name="order_placed">The order has been placed.</string>
+    <string name="place_order">Place Order</string>
+    <string name="subtotal">subtotal</string>
+    <string name="salestax">salesTax</string>
+    <string name="totalamount">Total Amount</string>
+    <string name="all_orders">All Orders</string>
+    <string name="cancel_selected_order">Cancel Selected Order</string>
+
+    <string name="breadText">Bread</string>
+    <string name="proteinText">Protein</string>
+    <string name="addOnText">Add On:</string>
+    <string name="sandwichMenuText">Sandwich Menu</string>
+    <string name="onion">Onion</string>
+    <string name="cheese">Cheese</string>
+    <string name="tomato">Tomato</string>
+    <string name="lettuce">Lettuce</string>
+    <string name="sandwich_added_to_order_message">Sandwich item was added to the order.</string>
+
     <string-array name="coffee_sizes_array">
         <item>Short</item>
         <item>Tall</item>
@@ -38,14 +57,18 @@
         <item>5</item>
     </string-array>
 
-    <string name="currentOrder_imagebutton">Current Order Image</string>
-    <string name="order_placed">The order has been placed.</string>
-    <string name="place_order">Place Order</string>
-    <string name="subtotal">subtotal</string>
-    <string name="salestax">salesTax</string>
-    <string name="totalamount">Total Amount</string>
-    <string name="all_orders">All Orders</string>
-    <string name="cancel_selected_order">Cancel Selected Order</string>
+    <string-array name="sandwich_bread_array">
+        <item>Bagel</item>
+        <item>Wheat</item>
+        <item>Sour Dough</item>
+    </string-array>
+
+    <string-array name="sandwich_protein_array">
+        <item>Beef</item>
+        <item>Fish</item>
+        <item>Chicken</item>
+    </string-array>
+
 
 
 </resources>

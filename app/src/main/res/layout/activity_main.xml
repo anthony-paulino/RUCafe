@@ -25,16 +25,32 @@
         android:layout_width="142dp"
         android:layout_height="129dp"
         android:background="@null"
+        android:contentDescription="@string/coffee_imagebutton"
         android:padding="8dp"
         android:scaleType="fitCenter"
         android:src="@drawable/coffee1"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintHorizontal_bias="0.183"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/RUCafeImage"
-        app:layout_constraintVertical_bias="0.368"
-        android:contentDescription="@string/coffee_imagebutton" />
+        app:layout_constraintVertical_bias="0.354" />
+
+    <ImageButton
+        android:id="@+id/sandwichButton"
+        android:layout_width="144dp"
+        android:layout_height="147dp"
+        android:background="@null"
+        android:contentDescription="@string/coffee_imagebutton"
+        android:padding="8dp"
+        android:scaleType="fitCenter"
+        android:src="@drawable/sandwich1"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.861"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.355" />
 
     <ImageButton
         android:id="@+id/currentOrderButton"
@@ -47,15 +63,15 @@
         android:src="@drawable/current_order"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.1"
+        app:layout_constraintHorizontal_bias="0.183"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/RUCafeImage"
-        app:layout_constraintVertical_bias="0.946" />
+        app:layout_constraintVertical_bias="0.726" />
 
     <ImageButton
         android:id="@+id/allOrdersButton"
         android:layout_width="142dp"
-        android:layout_height="129dp"
+        android:layout_height="131dp"
         android:background="@null"
         android:contentDescription="@string/currentOrder_imagebutton"
         android:padding="8dp"
@@ -63,10 +79,10 @@
         android:src="@drawable/all_orders"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.864"
+        app:layout_constraintHorizontal_bias="0.848"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/RUCafeImage"
-        app:layout_constraintVertical_bias="0.946" />
+        app:layout_constraintVertical_bias="0.726" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

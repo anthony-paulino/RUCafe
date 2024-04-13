@@ -55,7 +55,7 @@ public class CoffeeMenuActivity extends AppCompatActivity {
     private void initSpinners() {
         coffeeSizeSpinner = findViewById(R.id.coffeeSizeSpinner);
         coffeeQuantitySpinner = findViewById(R.id.coffeeQuantitySpinner);
-        subTotalTextView = findViewById(R.id.subTotalEditText);
+        subTotalTextView = findViewById(R.id.coffeeSubTotal);
 
         // Set up coffee size spinner
         ArrayAdapter<CharSequence> sizeAdapter = ArrayAdapter.createFromResource(

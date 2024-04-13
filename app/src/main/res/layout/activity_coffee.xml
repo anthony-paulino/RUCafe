@@ -192,7 +192,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.879"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/subTotalEditText"
+        app:layout_constraintTop_toBottomOf="@+id/coffeeSubTotal"
         app:layout_constraintVertical_bias="0.414" />
 
     <Button
@@ -209,7 +209,7 @@
         app:layout_constraintVertical_bias="0.021" />
 
     <EditText
-        android:id="@+id/subTotalEditText"
+        android:id="@+id/coffeeSubTotal"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/addToOrderButton"

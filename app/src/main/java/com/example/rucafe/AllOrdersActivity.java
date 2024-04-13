@@ -1,5 +1,6 @@
 package com.example.rucafe;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -30,18 +31,14 @@ public class AllOrdersActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_allorders);
-
         // Initialize UI components
         orderNumberSpinner = findViewById(R.id.orderNumberSpinner);
         currentOrderList = findViewById(R.id.currentOrderList);
         totalAmountEditText = findViewById(R.id.totalAmountEditText);
         cancelButton = findViewById(R.id.cancelOrderButton);
         mainMenuButton = findViewById(R.id.mainMenuButton);
-
-
         // Get the OrderManager object
         orderManager = GlobalDataManager.getInstance().getOrderManager();
-
         // Populate the order number spinner
         updateState();
         // Set up event handlers
@@ -82,12 +79,30 @@ public class AllOrdersActivity extends AppCompatActivity {
     private void cancelOrder() {
         if (orderNumberSpinner.getSelectedItem() != null) {
             int selectedOrderNumber = (int) orderNumberSpinner.getSelectedItem();
-            orderManager.cancelOrder(selectedOrderNumber);
-            // Refresh the order number spinner and clear the current order list
-            populateOrderNumbers();
-            currentOrderList.setAdapter(null);
-            totalAmountEditText.setText("");
-            showToast("Order canceled successfully.");
+            // Get the order number as a string
+            String orderNumberString = String.valueOf(selectedOrderNumber);
+            // Create the confirmation message including the order number
+            String confirmationMessage = "Are you sure you want to cancel order #" + orderNumberString + "?";
+            // Create an AlertDialog to confirm cancellation
+            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+            builder.setTitle("Cancel Order");
+            builder.setMessage(confirmationMessage);
+            // Add the "Yes" button, which cancels the order if clicked
+            builder.setPositiveButton("Yes", (dialog, which) -> {
+                orderManager.cancelOrder(selectedOrderNumber);
+                // Refresh the order number spinner and clear the current order list
+                populateOrderNumbers();
+                currentOrderList.setAdapter(null);
+                totalAmountEditText.setText("");
+                showToast("Order canceled successfully.");
+            });
+            // Add the "No" button, which closes the dialog without canceling the order
+            builder.setNegativeButton("No", (dialog, which) -> {
+                // Do nothing, just close the dialog
+            });
+            // Create and show the AlertDialog
+            AlertDialog dialog = builder.create();
+            dialog.show();
         } else {
             showToast("There is no selected order to cancel.");
         }
@@ -126,8 +141,6 @@ public class AllOrdersActivity extends AppCompatActivity {
             updateTotalAmount(null);
         }
     }
-
-
 
     private void showToast(String message) {
         Toast.makeText(this, message, Toast.LENGTH_SHORT).show();

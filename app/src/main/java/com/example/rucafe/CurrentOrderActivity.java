@@ -28,7 +28,7 @@ public class CurrentOrderActivity extends AppCompatActivity implements AdapterVi
         setContentView(R.layout.activity_currentorder);
         // Initialize UI components
         currentOrderList = findViewById(R.id.currentOrderList);
-        subTotalTextField = findViewById(R.id.subTotalEditText);
+        subTotalTextField = findViewById(R.id.currentOrderSubTotal);
         salesTaxTextField = findViewById(R.id.salesTaxEditText);
         totalAmountTextField = findViewById(R.id.totalAmountEditText);
         // Get the OrderManager object
