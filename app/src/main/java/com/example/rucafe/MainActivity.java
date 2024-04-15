@@ -2,17 +2,10 @@ package com.example.rucafe;
 
 import android.content.Intent;
 import android.os.Bundle;
-
-import android.graphics.Color;
 import android.view.View;
 import android.widget.ImageButton;
-import android.widget.TextView;
 
-import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
 
 public class MainActivity extends AppCompatActivity {
     // "Singleton" design pattern
@@ -31,40 +24,12 @@ public class MainActivity extends AppCompatActivity {
         ImageButton currentOrderButton = findViewById(R.id.currentOrderButton);
         ImageButton allOrdersButton = findViewById(R.id.allOrdersButton);
 
-        coffeeButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                navigateTo(CoffeeMenuActivity.class);
-            }
-        });
+        coffeeButton.setOnClickListener(view -> navigateTo(CoffeeMenuActivity.class));
+        sandwichButton.setOnClickListener(view -> navigateTo(SandwichMenuActivity.class));
+        donutButton.setOnClickListener(view -> navigateTo(DonutMenuActivity.class));
 
-        sandwichButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                navigateTo(SandwichMenuActivity.class);
-            }
-        });
-
-        donutButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                navigateTo(DonutMenuActivity.class);
-            }
-        });
-
-
-        currentOrderButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                navigateTo(CurrentOrderActivity.class);
-            }
-        });
-        allOrdersButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                navigateTo(AllOrdersActivity.class);
-            }
-        });
+        currentOrderButton.setOnClickListener(view -> navigateTo(CurrentOrderActivity.class));
+        allOrdersButton.setOnClickListener(view -> navigateTo(AllOrdersActivity.class));
 
     }
 

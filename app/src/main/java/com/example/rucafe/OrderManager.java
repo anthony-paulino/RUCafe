@@ -1,8 +1,5 @@
 package com.example.rucafe;
 
-import java.io.File;
-import java.io.FileWriter;
-import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -19,9 +16,9 @@ import java.util.stream.Collectors;
  */
 public class OrderManager {
     private int orderNumber = 1;
-    private Order currentOrder = new Order(orderNumber, new ArrayList<MenuItem>());
-    private Order potentialOrder = new Order(orderNumber, new ArrayList<MenuItem>());
-    private List<Order> allOrders = new ArrayList<Order>();
+    private Order currentOrder = new Order(orderNumber, new ArrayList<>());
+    private Order potentialOrder = new Order(orderNumber, new ArrayList<>());
+    private List<Order> allOrders = new ArrayList<>();
     private static final double SALES_TAX_RATE = 0.06625;
 
     /**
@@ -36,7 +33,7 @@ public class OrderManager {
     public void setCurrentToPotential() {
         List<MenuItem> items = currentOrder.getItems();
         items.addAll(potentialOrder.getItems());
-        potentialOrder = new Order(orderNumber, new ArrayList<MenuItem>());
+        potentialOrder = new Order(orderNumber, new ArrayList<>());
     }
 
     /**

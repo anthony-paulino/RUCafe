@@ -1,6 +1,7 @@
 package com.example.rucafe;
 
-import java.util.ArrayList;
+import androidx.annotation.NonNull;
+
 import java.util.List;
 
 /**
@@ -46,6 +47,7 @@ public class Order {
      *
      * @return A string representing the Order object, which is a string representation of its list of items.
      */
+    @NonNull
     @Override
     public String toString() {
         return items.toString();

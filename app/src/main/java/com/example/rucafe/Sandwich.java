@@ -1,5 +1,7 @@
 package com.example.rucafe;
 
+import androidx.annotation.NonNull;
+
 import java.util.List;
 
 /**
@@ -72,6 +74,7 @@ public class Sandwich extends MenuItem {
      *
      * @return A string representing the Sandwich object, including bread, protein, add-ons, and quantity.
      */
+    @NonNull
     @Override
     public String toString() {
         StringBuilder stringBuilder = new StringBuilder();

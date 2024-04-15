@@ -23,8 +23,6 @@ public class ItemsAdapter extends RecyclerView.Adapter<ItemsAdapter.ItemsHolder>
     private Context context;
     private ArrayList<Item> items;
     private GlobalDataManager globalDataManager;
-    private ArrayList<Chip> chipList;
-    private ArrayList<Spinner> spinnerList;
 
 
 
@@ -32,9 +30,6 @@ public class ItemsAdapter extends RecyclerView.Adapter<ItemsAdapter.ItemsHolder>
         this.context = context;
         this.items = items;
         this.globalDataManager = globalDataManager;
-        this.chipList = new ArrayList<>();
-        this.spinnerList = new ArrayList<>();
-
     }
 
     @NonNull
@@ -74,9 +69,6 @@ public class ItemsAdapter extends RecyclerView.Adapter<ItemsAdapter.ItemsHolder>
                 // Do nothing
             }
         });
-        // Add chip view to the list when it is bound
-        chipList.add(holder.chip_selected);
-        spinnerList.add(holder.spinner);
     }
 
     @Override
@@ -84,16 +76,6 @@ public class ItemsAdapter extends RecyclerView.Adapter<ItemsAdapter.ItemsHolder>
         return items.size();
     }
 
-    // Method to reset both chip selections and spinner selections
-    public void resetAllViews() {
-        for (Chip chip : chipList) {
-            chip.setSelected(false);
-        }
-        for (Spinner spinner : spinnerList) {
-            spinner.setSelection(0);
-        }
-        notifyDataSetChanged(); // Notify adapter that data has changed
-    }
     public static class ItemsHolder extends RecyclerView.ViewHolder {
         private TextView tv_name, tv_price;
         private ImageView im_item;
@@ -111,24 +93,21 @@ public class ItemsAdapter extends RecyclerView.Adapter<ItemsAdapter.ItemsHolder>
             parentLayout = itemView.findViewById(R.id.rowLayout);
             spinner = itemView.findViewById(R.id.spinner_quantity);
             this.globalDataManager = globalDataManager;
-            chip_selected.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    chip_selected.setSelected(!chip_selected.isSelected());
-                    String tvLabel = tv_name.getText().toString();
-                    Donut donut = (Donut) Item.getMenuItemByTVLabel(globalDataManager.getDonutItems(), tvLabel);
+            chip_selected.setOnClickListener(view -> {
+                chip_selected.setSelected(!chip_selected.isSelected());
+                String tvLabel = tv_name.getText().toString();
+                Donut donut = (Donut) Item.getMenuItemByTVLabel(globalDataManager.getDonutItems(), tvLabel);
 
-                    if (chip_selected.isSelected()) {
-                        // Add item to order using GlobalDataManager
-                        globalDataManager.getOrderManager().addToPotentialOrder(donut);
-                        Toast.makeText(itemView.getContext(), tvLabel + " selected", Toast.LENGTH_SHORT).show();
-                    } else {
-                        // Remove item from order using GlobalDataManager
-                        globalDataManager.getOrderManager().removeFromPotentialOrder(donut);
-                        Toast.makeText(itemView.getContext(), tvLabel + " unselected", Toast.LENGTH_SHORT).show();
-                    }
-                    System.out.println(globalDataManager.getOrderManager().getPotentialOrder().toString());
+                if (chip_selected.isSelected()) {
+                    // Add item to order using GlobalDataManager
+                    globalDataManager.getOrderManager().addToPotentialOrder(donut);
+                    Toast.makeText(itemView.getContext(), tvLabel + " selected", Toast.LENGTH_SHORT).show();
+                } else {
+                    // Remove item from order using GlobalDataManager
+                    globalDataManager.getOrderManager().removeFromPotentialOrder(donut);
+                    Toast.makeText(itemView.getContext(), tvLabel + " unselected", Toast.LENGTH_SHORT).show();
                 }
+                System.out.println(globalDataManager.getOrderManager().getPotentialOrder().toString());
             });
         }
     }

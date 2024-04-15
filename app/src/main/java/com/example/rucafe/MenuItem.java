@@ -1,5 +1,7 @@
 package com.example.rucafe;
 
+import androidx.annotation.NonNull;
+
 /**
  * Represents a generic menu item in the cafe.
  * This class serves as the base class for specific menu item types
@@ -50,6 +52,7 @@ public abstract class MenuItem {
      *
      * @return A string representing the MenuItem object, which is its name.
      */
+    @NonNull
     @Override
     public String toString() {
         return name;

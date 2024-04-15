@@ -1,5 +1,7 @@
 package com.example.rucafe;
 
+import androidx.annotation.NonNull;
+
 /**
  * Represents a donut item in the cafe menu.
  * This class extends the MenuItem class and provides functionality
@@ -87,6 +89,7 @@ public class Donut extends MenuItem {
      *
      * @return A string representing the Donut object, including type, flavor, and quantity.
      */
+    @NonNull
     @Override
     public String toString() {
         return "Donut - [Type: " + type + ", Flavor: " + flavor + ", Quantity: " + quantity + "]";
