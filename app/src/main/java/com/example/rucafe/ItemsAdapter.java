@@ -1,32 +1,40 @@
 package com.example.rucafe;
 
-import android.app.AlertDialog;
 import android.content.Context;
-import android.content.DialogInterface;
-import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
+
 import androidx.annotation.NonNull;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.google.android.material.chip.Chip;
 
 import java.util.ArrayList;
 
 public class ItemsAdapter extends RecyclerView.Adapter<ItemsAdapter.ItemsHolder> {
     private Context context;
     private ArrayList<Item> items;
+    private GlobalDataManager globalDataManager;
+    private ArrayList<Chip> chipList;
+    private ArrayList<Spinner> spinnerList;
 
-    public ItemsAdapter(Context context, ArrayList<Item> items) {
+
+
+    public ItemsAdapter(Context context, GlobalDataManager globalDataManager, ArrayList<Item> items) {
         this.context = context;
         this.items = items;
+        this.globalDataManager = globalDataManager;
+        this.chipList = new ArrayList<>();
+        this.spinnerList = new ArrayList<>();
+
     }
 
     @NonNull
@@ -34,7 +42,7 @@ public class ItemsAdapter extends RecyclerView.Adapter<ItemsAdapter.ItemsHolder>
     public ItemsHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(context);
         View view = inflater.inflate(R.layout.row_view, parent, false);
-        return new ItemsHolder(view);
+        return new ItemsHolder(view, globalDataManager);
     }
 
     @Override
@@ -43,6 +51,7 @@ public class ItemsAdapter extends RecyclerView.Adapter<ItemsAdapter.ItemsHolder>
         holder.tv_name.setText(currentItem.getTVLabel());
         holder.tv_price.setText(currentItem.getPrice());
         holder.im_item.setImageResource(currentItem.getImage());
+        holder.globalDataManager = this.globalDataManager; // Pass GlobalDataManager object to ItemsHolder
         // Populate spinner with data
         ArrayAdapter<CharSequence> spinnerAdapter = ArrayAdapter.createFromResource(context,
                 R.array.quantity_array, android.R.layout.simple_spinner_item);
@@ -56,14 +65,18 @@ public class ItemsAdapter extends RecyclerView.Adapter<ItemsAdapter.ItemsHolder>
             public void onItemSelected(AdapterView<?> parent, View view, int pos, long id) {
                 // Update the quantity of the current item
                 int quantity = Integer.parseInt(parent.getItemAtPosition(pos).toString());
-                Donut donut = (Donut)currentItem.getItem();
+                Donut donut = (Donut) currentItem.getItem();
                 donut.setQuantity(quantity);
             }
+
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
                 // Do nothing
             }
         });
+        // Add chip view to the list when it is bound
+        chipList.add(holder.chip_selected);
+        spinnerList.add(holder.spinner);
     }
 
     @Override
@@ -71,56 +84,53 @@ public class ItemsAdapter extends RecyclerView.Adapter<ItemsAdapter.ItemsHolder>
         return items.size();
     }
 
+    // Method to reset both chip selections and spinner selections
+    public void resetAllViews() {
+        for (Chip chip : chipList) {
+            chip.setSelected(false);
+        }
+        for (Spinner spinner : spinnerList) {
+            spinner.setSelection(0);
+        }
+        notifyDataSetChanged(); // Notify adapter that data has changed
+    }
     public static class ItemsHolder extends RecyclerView.ViewHolder {
         private TextView tv_name, tv_price;
         private ImageView im_item;
-        private Button btn_add;
+        private Chip chip_selected;
         private ConstraintLayout parentLayout;
         private Spinner spinner;
+        private GlobalDataManager globalDataManager;
 
-        public ItemsHolder(@NonNull View itemView) {
+        public ItemsHolder(@NonNull View itemView, GlobalDataManager globalDataManager) {
             super(itemView);
             tv_name = itemView.findViewById(R.id.tv_flavor);
             tv_price = itemView.findViewById(R.id.tv_price);
             im_item = itemView.findViewById(R.id.im_item);
-            btn_add = itemView.findViewById(R.id.btn_add);
+            chip_selected = itemView.findViewById(R.id.btn_add);
             parentLayout = itemView.findViewById(R.id.rowLayout);
             spinner = itemView.findViewById(R.id.spinner_quantity);
-            setAddButtonOnClick(itemView);
-
-            parentLayout.setOnClickListener(new View.OnClickListener() {
+            this.globalDataManager = globalDataManager;
+            chip_selected.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    Intent intent = new Intent(itemView.getContext(), ItemSelectedActivity.class);
-                    intent.putExtra("ITEM", tv_name.getText());
-                    itemView.getContext().startActivity(intent);
-                }
-            });
-        }
+                    chip_selected.setSelected(!chip_selected.isSelected());
+                    String tvLabel = tv_name.getText().toString();
+                    Donut donut = (Donut) Item.getMenuItemByTVLabel(globalDataManager.getDonutItems(), tvLabel);
 
-        private void setAddButtonOnClick(@NonNull View itemView) {
-            btn_add.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    AlertDialog.Builder alert = new AlertDialog.Builder(itemView.getContext());
-                    alert.setTitle("Add to order");
-                    alert.setMessage(tv_name.getText().toString());
-
-                    alert.setPositiveButton("yes", new DialogInterface.OnClickListener() {
-                        public void onClick(DialogInterface dialog, int which) {
-                            Toast.makeText(itemView.getContext(),
-                                    tv_name.getText().toString() + " added.", Toast.LENGTH_LONG).show();
-                        }
-                    }).setNegativeButton("no", new DialogInterface.OnClickListener() {
-                        public void onClick(DialogInterface dialog, int which) {
-                            Toast.makeText(itemView.getContext(),
-                                    tv_name.getText().toString() + " not added.", Toast.LENGTH_LONG).show();
-                        }
-                    });
-                    AlertDialog dialog = alert.create();
-                    dialog.show();
+                    if (chip_selected.isSelected()) {
+                        // Add item to order using GlobalDataManager
+                        globalDataManager.getOrderManager().addToPotentialOrder(donut);
+                        Toast.makeText(itemView.getContext(), tvLabel + " selected", Toast.LENGTH_SHORT).show();
+                    } else {
+                        // Remove item from order using GlobalDataManager
+                        globalDataManager.getOrderManager().removeFromPotentialOrder(donut);
+                        Toast.makeText(itemView.getContext(), tvLabel + " unselected", Toast.LENGTH_SHORT).show();
+                    }
+                    System.out.println(globalDataManager.getOrderManager().getPotentialOrder().toString());
                 }
             });
         }
     }
 }
+

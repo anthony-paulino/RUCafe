@@ -1,16 +1,19 @@
 package com.example.rucafe;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 public class GlobalDataManager {
     private static GlobalDataManager instance;
     private OrderManager orderManager;
+    private ArrayList<Item> donutItems;
 
     private HashMap<String, Integer> donutImageMap;
 
     private GlobalDataManager() {
         orderManager = new OrderManager();
         initializeDonutImageMap();
+        donutItems = new ArrayList<>();
     }
 
     public static synchronized GlobalDataManager getInstance() {
@@ -31,6 +34,14 @@ public class GlobalDataManager {
             // Return a default image resource if the donut name is not found
             return -1;
         }
+    }
+
+    public ArrayList<Item> getDonutItems() {
+        return donutItems;
+    }
+
+    public void resetDonutItems(){
+        donutItems = new ArrayList<>();
     }
 
     private void initializeDonutImageMap() {

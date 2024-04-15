@@ -26,7 +26,6 @@
         <activity android:name=".DonutMenuActivity"/>
         <activity android:name=".CurrentOrderActivity"/>
         <activity android:name=".AllOrdersActivity"/>
-        <activity android:name=".ItemSelectedActivity"/>
 
     </application>
 

@@ -44,6 +44,7 @@ public class CurrentOrderActivity extends AppCompatActivity implements AdapterVi
         // Set up place order button click listener
         Button placeOrderButton = findViewById(R.id.placeOrderButton);
         placeOrderButton.setOnClickListener(v -> placeOrder());
+        // set up main menu button
         findViewById(R.id.mainMenuButton).setOnClickListener(v -> mainMenuClick());
     }
 

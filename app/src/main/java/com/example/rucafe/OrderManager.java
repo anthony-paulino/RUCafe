@@ -191,46 +191,6 @@ public class OrderManager {
     }
 
     /**
-     * Saves orders to a file and returns a message indicating the status of the operation.
-     *
-     * @param stage The stage used to display the file chooser dialog.
-     * @return A message indicating the status of the save operation.
-     */
-    /*public String saveOrdersToFile(Stage stage) {
-        StringBuilder stringBuilder = new StringBuilder();
-        FileChooser fileChooser = new FileChooser();
-        fileChooser.setTitle("Save Orders");
-        fileChooser.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("Text Files", "*.txt"));
-        File file = fileChooser.showSaveDialog(stage);
-        if (file != null) { // User selected a file
-            try (PrintWriter writer = new PrintWriter(new FileWriter(file))) {
-                if (allOrders.isEmpty())
-                    writer.println("There are no orders.");
-                for (Order order : allOrders) {
-                    writer.println("Order Number: " + order.getOrderNumber());
-                    writer.println("Items:");
-                    for (MenuItem item : order.getItems()) {
-                        writer.println("- " + item.toString() + " - $" + String.format("%.2f", item.getPrice()));
-                    }
-                    double subtotal = calculateSubtotal(order);
-                    double salesTax = calculateSalesTax(subtotal);
-                    double totalAmount = calculateTotalAmount(subtotal, salesTax);
-                    writer.println("Subtotal: $" + String.format("%.2f", subtotal));
-                    writer.println("Sales Tax: $" + String.format("%.2f", salesTax));
-                    writer.println("Total Amount: $" + String.format("%.2f", totalAmount));
-                    writer.println();
-                }
-                stringBuilder.append("Orders saved to the file.").append("\n");
-            } catch (Exception e) {
-                stringBuilder.append("Error saving orders to file: ").append(e.getMessage()).append("\n");
-            }
-        } else {
-            stringBuilder.append("File selection canceled by user.\n");
-        }
-        return stringBuilder.toString();
-    }*/
-
-    /**
      * Filters coffee items from the current order.
      *
      * @param currentOrder The current order from which to filter coffee items.

@@ -1,5 +1,6 @@
 package com.example.rucafe;
 import java.io.Serializable;
+import java.util.ArrayList;
 
 /**
  * This class defines the data structure of an item to be displayed in the RecyclerView
@@ -51,6 +52,22 @@ public class Item implements Serializable {
 
     public String getTVLabel() {
         return tvLabel;
+    }
+
+    /**
+     * Method to retrieve the MenuItem object that has the specified tvLabel field.
+     *
+     * @param items    The list of items to search through.
+     * @param tvLabel  The tvLabel to search for.
+     * @return The MenuItem object with the specified tvLabel, or null if not found.
+     */
+    public static MenuItem getMenuItemByTVLabel(ArrayList<Item> items, String tvLabel) {
+        for (Item item : items) {
+            if (item.getTVLabel().equals(tvLabel)) {
+                return item.getItem();
+            }
+        }
+        return null; // Not found
     }
 }
 
