@@ -44,9 +44,11 @@
     <string name="plus_sign">+</string>
     <string name="donut_image">Donut Image</string>
     <string name="view_items_selected">View Items Selected</string>
-    <string name="add_selected_items">Add Selected Items</string>
+    <string name="add_selected_items">Add selected items to order</string>
     <string name="addText">add</string>
     <string name="image_of_row">image of row</string>
+    <string name="sandwich_image_button">sandwich image button</string>
+    <string name="all_orders_button">all orders button</string>
 
     <string-array name="coffee_sizes_array">
         <item>Short</item>

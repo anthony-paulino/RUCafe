@@ -9,7 +9,7 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rcView_menu"
         android:layout_width="0dp"
-        android:layout_height="695dp"
+        android:layout_height="627dp"
         android:scrollbars="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -20,23 +20,25 @@
 
     <Button
         android:id="@+id/mainMenuButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="123dp"
+        android:layout_height="48dp"
         android:layout_marginStart="16dp"
         android:text="@string/main_menu"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/rcView_menu" />
+        app:layout_constraintTop_toBottomOf="@+id/rcView_menu"
+        app:layout_constraintVertical_bias="0.166" />
 
     <Button
         android:id="@+id/itemsSelected"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="221dp"
+        android:layout_height="56dp"
         android:text="@string/add_selected_items"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.924"
+        app:layout_constraintHorizontal_bias="0.515"
         app:layout_constraintStart_toEndOf="@+id/mainMenuButton"
-        app:layout_constraintTop_toBottomOf="@+id/rcView_menu" />
+        app:layout_constraintTop_toBottomOf="@+id/rcView_menu"
+        app:layout_constraintVertical_bias="0.112" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

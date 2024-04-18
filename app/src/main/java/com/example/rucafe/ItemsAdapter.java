@@ -76,6 +76,8 @@ public class ItemsAdapter extends RecyclerView.Adapter<ItemsAdapter.ItemsHolder>
         return items.size();
     }
 
+
+
     public static class ItemsHolder extends RecyclerView.ViewHolder {
         private TextView tv_name, tv_price;
         private ImageView im_item;
@@ -83,6 +85,15 @@ public class ItemsAdapter extends RecyclerView.Adapter<ItemsAdapter.ItemsHolder>
         private ConstraintLayout parentLayout;
         private Spinner spinner;
         private GlobalDataManager globalDataManager;
+
+        private String updateSubTotal() {
+            double totalSubtotal = 0.0;
+            Order order = globalDataManager.getOrderManager().getPotentialOrder();
+            for (Donut donut : globalDataManager.getOrderManager().filterDonutItems(order)) {
+                totalSubtotal += donut.getPrice();
+            }
+            return "$" + String.format("%.2f", totalSubtotal);
+        }
 
         public ItemsHolder(@NonNull View itemView, GlobalDataManager globalDataManager) {
             super(itemView);
@@ -101,11 +112,11 @@ public class ItemsAdapter extends RecyclerView.Adapter<ItemsAdapter.ItemsHolder>
                 if (chip_selected.isSelected()) {
                     // Add item to order using GlobalDataManager
                     globalDataManager.getOrderManager().addToPotentialOrder(donut);
-                    Toast.makeText(itemView.getContext(), tvLabel + " selected", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(itemView.getContext(), "Donut selected, Sub-total: " + updateSubTotal(), Toast.LENGTH_SHORT).show();
                 } else {
                     // Remove item from order using GlobalDataManager
                     globalDataManager.getOrderManager().removeFromPotentialOrder(donut);
-                    Toast.makeText(itemView.getContext(), tvLabel + " unselected", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(itemView.getContext(), "Donut unselected, Sub-total: " + updateSubTotal(), Toast.LENGTH_SHORT).show();
                 }
                 System.out.println(globalDataManager.getOrderManager().getPotentialOrder().toString());
             });

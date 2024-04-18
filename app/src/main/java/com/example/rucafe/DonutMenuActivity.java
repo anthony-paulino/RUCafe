@@ -30,8 +30,6 @@ public class DonutMenuActivity extends AppCompatActivity {
         setContentView(R.layout.activity_donut);
         RecyclerView rcview = findViewById(R.id.rcView_menu);
         globalDataManager = GlobalDataManager.getInstance();
-        donutItems = globalDataManager.getDonutItems();
-
         setupMenuItems(); //add the list of items to the ArrayList
 
         ItemsAdapter adapter = new ItemsAdapter(this, globalDataManager, donutItems); //create the adapter
@@ -48,6 +46,8 @@ public class DonutMenuActivity extends AppCompatActivity {
      * Helper method to set up the data (the Model of the MVC).
      */
     private void setupMenuItems() {
+        globalDataManager.resetDonutItems();
+        donutItems = globalDataManager.getDonutItems();
         String [] donutTVLabel = getResources().getStringArray(R.array.tv_donutLabels);
         String [] donutFlavors = getResources().getStringArray(R.array.donutFlavors);
         for (int i = 0; i < 6; i++) {
@@ -80,10 +80,19 @@ public class DonutMenuActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
+    private String updateSubTotal() {
+        double totalSubtotal = 0.0;
+        Order order = globalDataManager.getOrderManager().getPotentialOrder();
+        for (Donut donut : globalDataManager.getOrderManager().filterDonutItems(order)) {
+            totalSubtotal += donut.getPrice();
+        }
+        return "$" + String.format("%.2f", totalSubtotal);
+    }
+
     public void addItemsSelected() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("Add the selected items");
-        builder.setMessage("Are you sure you want to add the selected items to the order?");
+        builder.setMessage("Are you sure you want to add the selected items with a subtotal [" + updateSubTotal() + "] to the order?");
 
         // Add the "Yes" button, which removes the item if clicked
         builder.setPositiveButton("Yes", (dialog, which) -> {
@@ -94,7 +103,7 @@ public class DonutMenuActivity extends AppCompatActivity {
             finish();
             startActivity(intent);
             globalDataManager.resetDonutItems();
-
+            donutItems = globalDataManager.getDonutItems();
             // Dismiss the dialog
             dialog.dismiss();
         });

@@ -63,6 +63,7 @@ public class Item implements Serializable {
      */
     public static MenuItem getMenuItemByTVLabel(ArrayList<Item> items, String tvLabel) {
         for (Item item : items) {
+            //System.out.println(item.toString());
             if (item.getTVLabel().equals(tvLabel)) {
                 return item.getItem();
             }
