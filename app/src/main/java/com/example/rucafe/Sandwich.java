@@ -26,9 +26,9 @@ public class Sandwich extends MenuItem {
     /**
      * Constructs a new Sandwich object with the specified bread, protein, add-ons, and quantity.
      *
-     * @param bread The type of bread used in the sandwich.
-     * @param protein The protein used in the sandwich.
-     * @param addOns The list of add-ons included in the sandwich.
+     * @param bread    The type of bread used in the sandwich.
+     * @param protein  The protein used in the sandwich.
+     * @param addOns   The list of add-ons included in the sandwich.
      * @param quantity The quantity of sandwich items.
      */
     public Sandwich(String bread, String protein, List<String> addOns, int quantity) {

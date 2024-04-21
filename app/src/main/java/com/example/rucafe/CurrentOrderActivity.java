@@ -9,9 +9,16 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Toast;
+
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.ObservableArrayList;
+
+/**
+ * Activity displaying the current order and allowing modifications.
+ *
+ * @author Anthony Paulino
+ */
 public class CurrentOrderActivity extends AppCompatActivity implements AdapterView.OnItemClickListener {
 
     private OrderManager orderManager;
@@ -22,6 +29,11 @@ public class CurrentOrderActivity extends AppCompatActivity implements AdapterVi
     private EditText totalAmountTextField;
     private ArrayAdapter<MenuItem> adapter;
 
+    /**
+     * Called when the activity is starting. This is where most initialization should go.
+     *
+     * @param savedInstanceState If the activity is being re-initialized after previously being shut down then this Bundle contains the data it most recently supplied in onSaveInstanceState(Bundle). Note: Otherwise, it is null.
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -48,17 +60,26 @@ public class CurrentOrderActivity extends AppCompatActivity implements AdapterVi
         findViewById(R.id.mainMenuButton).setOnClickListener(v -> mainMenuClick());
     }
 
-    private void updateView(){
+    /**
+     * Update and refresh the view including the current order list, subtotal, sales tax, and total amount.
+     */
+    private void updateView() {
         updateObservableList();
         updateTotals();
         adapter.notifyDataSetChanged();
     }
 
+    /**
+     * Update and set the observable list and fill it with the current order items.
+     */
     private void updateObservableList() {
         currentOrderItems.clear();
         currentOrderItems.addAll(orderManager.getCurrentOrder().getItems());
     }
 
+    /**
+     * Update the subtotal, sales tax, and total amount text fields based on the current order.
+     */
     private void updateTotals() {
         double subtotal = OrderManager.calculateSubtotal(orderManager.getCurrentOrder());
         double salesTax = OrderManager.calculateSalesTax(subtotal);
@@ -88,6 +109,9 @@ public class CurrentOrderActivity extends AppCompatActivity implements AdapterVi
         dialog.show();
     }
 
+    /**
+     * Place the current order, show a toast for successfully placing the order or if the current order is empty.
+     */
     private void placeOrder() {
         if (orderManager.getCurrentOrder().getItems().isEmpty()) {
             showToast("Order is empty.");
@@ -98,14 +122,20 @@ public class CurrentOrderActivity extends AppCompatActivity implements AdapterVi
         updateView();
     }
 
+    /**
+     * Display a toast message.
+     *
+     * @param message The message to display.
+     */
     private void showToast(String message) {
         Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
     }
 
+    /**
+     * Handle the click event from the main menu button, it navigates back to the main menu.
+     */
     public void mainMenuClick() {
         Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
     }
 }
-
-

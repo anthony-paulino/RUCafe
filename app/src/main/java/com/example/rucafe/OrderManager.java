@@ -126,6 +126,32 @@ public class OrderManager {
     }
 
     /**
+     * Clear the potential order.
+     */
+    public void resetPotentialOrder() {
+        potentialOrder = new Order(orderNumber, new ArrayList<>());
+    }
+
+    /**
+     * Check whether the donut type is in the potential order.
+     *
+     * @param donut the donut to check if its in the potential order.
+     * @return true if the donut type is in the order, false otherwise.
+     */
+    public boolean isDonutItemInPotentialOrder(Donut donut) {
+        for (MenuItem item : potentialOrder.getItems()) {
+            if (item instanceof Donut) {
+                Donut donutItem = (Donut) item;
+                if (donutItem.getType().equals(donut.getType()) && donutItem.getFlavor().equals(donut.getFlavor())) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+
+    /**
      * Cancels an order by removing it from the list of all orders.
      *
      * @param orderNumber The order number of the order to cancel.
@@ -188,19 +214,6 @@ public class OrderManager {
     }
 
     /**
-     * Filters coffee items from the current order.
-     *
-     * @param currentOrder The current order from which to filter coffee items.
-     * @return A list of coffee items in the current order.
-     */
-    public List<Coffee> filterCoffeeItems(Order currentOrder) {
-        return currentOrder.getItems().stream()
-                .filter(item -> item instanceof Coffee)
-                .map(item -> (Coffee) item)
-                .collect(Collectors.toList());
-    }
-
-    /**
      * Filters donut items from the current order.
      *
      * @param currentOrder The current order from which to filter donut items.
@@ -213,16 +226,4 @@ public class OrderManager {
                 .collect(Collectors.toList());
     }
 
-    /**
-     * Filters sandwich items from the current order.
-     *
-     * @param currentOrder The current order from which to filter sandwich items.
-     * @return A list of sandwich items in the current order.
-     */
-    public List<Sandwich> filterSandwichItems(Order currentOrder) {
-        return currentOrder.getItems().stream()
-                .filter(item -> item instanceof Sandwich)
-                .map(item -> (Sandwich) item)
-                .collect(Collectors.toList());
-    }
 }

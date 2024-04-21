@@ -3,6 +3,9 @@ package com.example.rucafe;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+/**
+ * Singleton class for managing global data throughout the application.
+ */
 public class GlobalDataManager {
     private static GlobalDataManager instance;
     private OrderManager orderManager;
@@ -10,12 +13,20 @@ public class GlobalDataManager {
 
     private HashMap<String, Integer> donutImageMap;
 
+    /**
+     * Private constructor to prevent instantiation from outside the class.
+     */
     private GlobalDataManager() {
         orderManager = new OrderManager();
         initializeDonutImageMap();
         donutItems = new ArrayList<>();
     }
 
+    /**
+     * Get the singleton instance of GlobalDataManager.
+     *
+     * @return The GlobalDataManager instance.
+     */
     public static synchronized GlobalDataManager getInstance() {
         if (instance == null) {
             instance = new GlobalDataManager();
@@ -23,10 +34,22 @@ public class GlobalDataManager {
         return instance;
     }
 
+    /**
+     * Get the OrderManager instance.
+     *
+     * @return The OrderManager instance.
+     */
     public OrderManager getOrderManager() {
         return orderManager;
     }
 
+
+    /**
+     * Get the image resource ID for the specified donut name.
+     *
+     * @param donutName The name of the donut.
+     * @return The image resource ID or -1 for an invalid key.
+     */
     public int getDonutImageResource(String donutName) {
         if (donutImageMap.containsKey(donutName)) {
             return donutImageMap.get(donutName);
@@ -36,14 +59,24 @@ public class GlobalDataManager {
         }
     }
 
+    /**
+     * Get the list of donut items.
+     *
+     * @return The list of donut items.
+     */
     public ArrayList<Item> getDonutItems() {
         return donutItems;
     }
 
-    public void resetDonutItems(){
+    public ArrayList<Item> restDonutList() {
         donutItems = new ArrayList<>();
+        return donutItems;
     }
 
+
+    /**
+     * Initialize the mapping between donut names and image resources.
+     */
     private void initializeDonutImageMap() {
         donutImageMap = new HashMap<>();
         // Populate the HashMap with donut names and their corresponding image resources

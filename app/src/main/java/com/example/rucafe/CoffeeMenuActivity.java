@@ -1,4 +1,5 @@
 package com.example.rucafe;
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -8,12 +9,20 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
+
 import androidx.appcompat.app.AppCompatActivity;
+
 import com.google.android.material.chip.Chip;
 import com.google.android.material.chip.ChipGroup;
+
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * This activity allows users to select and customize coffee orders, known as the Coffe menu.
+ *
+ * @author Anthony Paulino
+ */
 public class CoffeeMenuActivity extends AppCompatActivity {
 
     private OrderManager orderManager;
@@ -23,6 +32,11 @@ public class CoffeeMenuActivity extends AppCompatActivity {
     private ChipGroup addInChipGroup;
     private List<String> selectedAddIns = new ArrayList<>();
 
+    /**
+     * Called when the activity is starting. This is where most initialization should go.
+     *
+     * @param savedInstanceState If the activity is being re-initialized after previously being shut down then this Bundle contains the data it most recently supplied in onSaveInstanceState(Bundle). Note: Otherwise, it is null.
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -37,7 +51,11 @@ public class CoffeeMenuActivity extends AppCompatActivity {
         initialState();
     }
 
-    private void initialState(){
+    /**
+     * Set the initial state of the activity.
+     * This is having all the chips deselected have having the size preselected to small and the quantity to 1.
+     */
+    private void initialState() {
         // Deselect all chips in the ChipGroup
         for (int i = 0; i < addInChipGroup.getChildCount(); i++) {
             View child = addInChipGroup.getChildAt(i);
@@ -49,31 +67,35 @@ public class CoffeeMenuActivity extends AppCompatActivity {
         // Reset spinner selections
         coffeeSizeSpinner.setSelection(0);
         coffeeQuantitySpinner.setSelection(0);
-        //update subtotal
+        // Update subtotal
         updateSubTotal();
     }
+
+    /**
+     * Initialize the two spinners for selecting coffee size and quantity.
+     */
     private void initSpinners() {
         coffeeSizeSpinner = findViewById(R.id.coffeeSizeSpinner);
         coffeeQuantitySpinner = findViewById(R.id.coffeeQuantitySpinner);
         subTotalTextView = findViewById(R.id.coffeeSubTotal);
-
         // Set up coffee size spinner
         ArrayAdapter<CharSequence> sizeAdapter = ArrayAdapter.createFromResource(
                 this, R.array.coffee_sizes_array, android.R.layout.simple_spinner_item);
         sizeAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         coffeeSizeSpinner.setAdapter(sizeAdapter);
-
         // Set up coffee quantity spinner
         ArrayAdapter<CharSequence> quantityAdapter = ArrayAdapter.createFromResource(
                 this, R.array.coffee_quantity_array, android.R.layout.simple_spinner_item);
         quantityAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         coffeeQuantitySpinner.setAdapter(quantityAdapter);
-
         // Set the listeners
         initCoffeeSizeSpinnerListener();
         initCoffeeQuantitySpinnerListener();
     }
 
+    /**
+     * Initialize the listener for the coffee size spinner.
+     */
     private void initCoffeeSizeSpinnerListener() {
         coffeeSizeSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -88,6 +110,9 @@ public class CoffeeMenuActivity extends AppCompatActivity {
         });
     }
 
+    /**
+     * Initialize the listener for the coffee quantity spinner.
+     */
     private void initCoffeeQuantitySpinnerListener() {
         coffeeQuantitySpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -102,6 +127,9 @@ public class CoffeeMenuActivity extends AppCompatActivity {
         });
     }
 
+    /**
+     * Initialize the ChipGroup for selecting add-ins for the coffee object.
+     */
     private void initChipGroup() {
         addInChipGroup = findViewById(R.id.addInChipGroup);
         // Find each chip by ID and set click listeners
@@ -118,6 +146,11 @@ public class CoffeeMenuActivity extends AppCompatActivity {
         caramelChip.setOnClickListener(v -> handleChipClick(caramelChip));
     }
 
+    /**
+     * Handle click events for the chips representing add-ins.
+     *
+     * @param chip The clicked chip.
+     */
     private void handleChipClick(Chip chip) {
         String chipText = chip.getText().toString();
         if (chip.isChecked()) {
@@ -128,23 +161,29 @@ public class CoffeeMenuActivity extends AppCompatActivity {
         updateSubTotal();
     }
 
+    /**
+     * Update the subtotal on the UI, by displaying the subtotal of he current selected coffee item based on selected size, quantity, and add-ins.
+     */
     private void updateSubTotal() {
         String selectedSize = coffeeSizeSpinner.getSelectedItem().toString();
         int selectedQuantity = Integer.parseInt(coffeeQuantitySpinner.getSelectedItem().toString());
-
         // Calculate subtotal based on size, quantity, and selected add-ins
         Coffee coffee = new Coffee(selectedSize, selectedAddIns, selectedQuantity);
         double subtotal = coffee.getPrice();
-        System.out.println();
         subTotalTextView.setText(getString(R.string.subTotalText, subtotal));
-
     }
 
+    /**
+     * Set up the button to add the selected coffee to the order.
+     */
     private void setupAddOrderButton() {
         Button addOrderButton = findViewById(R.id.addToOrderButton);
         addOrderButton.setOnClickListener(v -> addSelectedCoffeeToOrder());
     }
 
+    /**
+     * Add the selected coffee to the current order.
+     */
     private void addSelectedCoffeeToOrder() {
         String selectedSize = coffeeSizeSpinner.getSelectedItem().toString();
         int selectedQuantity = Integer.parseInt(coffeeQuantitySpinner.getSelectedItem().toString());
@@ -154,14 +193,22 @@ public class CoffeeMenuActivity extends AppCompatActivity {
         orderManager.addToCurrentOrder(coffee);
         // Display a toast message indicating that the coffee item was added to the order
         showToast(getString(R.string.coffee_added_to_order_message));
-        System.out.println(orderManager.getCurrentOrder().toString());
         // Update to initial state
         initialState();
     }
+
+    /**
+     * Display a toast message.
+     *
+     * @param message The message to display.
+     */
     private void showToast(String message) {
         Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
     }
 
+    /**
+     * Navigate back to the main menu.
+     */
     public void mainMenuClick() {
         Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
